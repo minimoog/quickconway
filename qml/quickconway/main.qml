@@ -33,7 +33,7 @@ Rectangle {
         Rectangle {
             width: GridView.view.cellWidth
             height: GridView.view.cellHeight
-            color: display ? "white" : "black"
+            color: display ? "black" : "white"
         }
     }
 
