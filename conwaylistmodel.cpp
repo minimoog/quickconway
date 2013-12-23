@@ -24,19 +24,14 @@
 
 ConwayListModel::ConwayListModel(QObject *parent) :
     QAbstractListModel(parent),
-    m_universeSize(50)
+    m_universeSize(50),
+    m_universe((m_universeSize + 2) * (m_universeSize + 2), false),
+    m_nextUniverse((m_universeSize + 2) * (m_universeSize + 2), false)
 {
-    m_universe = new bool[(m_universeSize + 2) * (m_universeSize + 2)];
-    m_nextUniverse = new bool[(m_universeSize + 2) * (m_universeSize + 2)];
-
-    memset(m_universe, false, sizeof(bool)*(m_universeSize + 2) * (m_universeSize + 2));
-    memset(m_nextUniverse, false, sizeof(bool)*(m_universeSize + 2) * (m_universeSize + 2));
 }
 
 ConwayListModel::~ConwayListModel()
 {
-    delete []m_universe;
-    delete []m_nextUniverse;
 }
 
 int ConwayListModel::rowCount(const QModelIndex &parent) const

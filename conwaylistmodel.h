@@ -24,6 +24,7 @@
 #define CONWAYLISTMODEL_H
 
 #include <QAbstractListModel>
+#include <QVector>
 
 class ConwayListModel : public QAbstractListModel
 {
@@ -44,9 +45,9 @@ public slots:
 private:
     bool isAlive(int k, int j);
 
-    bool *m_universe;
-    bool *m_nextUniverse;
     int m_universeSize;
+    QVector<bool> m_universe;
+    QVector<bool> m_nextUniverse;
 };
 
 #endif // CONWAYLISTMODEL_H
