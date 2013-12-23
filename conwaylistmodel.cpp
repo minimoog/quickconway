@@ -71,6 +71,32 @@ bool ConwayListModel::isAlive(int k, int j)
     return false;
 }
 
+int ConwayListModel::universeSize() const
+{
+    return m_universeSize;
+}
+
+void ConwayListModel::setUniverseSize(int universeSize)
+{
+    if (m_universeSize != universeSize) {
+        m_universeSize = universeSize;
+
+        beginResetModel();
+
+        m_universe.clear();
+        m_nextUniverse.clear();
+
+        for (int i = 0; i < (m_universeSize + 2) * (m_universeSize + 2); ++i) {
+            m_universe.push_back(false);
+            m_nextUniverse.push_back(false);
+        }
+
+        endResetModel();
+
+        emit universeSizeChanged();
+    }
+}
+
 void ConwayListModel::nextGeneration()
 {
     for(int k = 1; k <= m_universeSize; k++) {

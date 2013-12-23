@@ -29,6 +29,8 @@
 class ConwayListModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int universeSize READ universeSize WRITE setUniverseSize NOTIFY universeSizeChanged)
+
 public:
     explicit ConwayListModel(QObject *parent = 0);
     virtual ~ConwayListModel();
@@ -36,7 +38,11 @@ public:
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
 
+    int universeSize() const;
+    void setUniverseSize(int universeSize);
+
 signals:
+    void universeSizeChanged();
 
 public slots:
     void randomize();

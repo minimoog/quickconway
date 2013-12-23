@@ -40,8 +40,8 @@ Rectangle {
     GridView {
         id: conwayView
 
-        cellHeight: parent.height / 50;
-        cellWidth: parent.width / 50;
+        cellHeight: parent.height / conwayListModel.universeSize;
+        cellWidth: parent.width / conwayListModel.universeSize;
         anchors.fill: parent
 
         delegate: cellDelegate
