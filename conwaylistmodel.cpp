@@ -48,7 +48,7 @@ QVariant ConwayListModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Qt::DisplayRole)
-        return m_universe[index.row() + m_universeSize * 2 + 2];
+        return m_universe[index.row() + m_universeSize * 1 + 1];
 
     return QVariant();
 }
