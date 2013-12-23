@@ -79,15 +79,17 @@ void ConwayListModel::nextGeneration()
         }
     }
 
-    beginResetModel();
-
     for(int k = 1; k <= m_universeSize; k++) {
         for(int j = 1; j <= m_universeSize; j++) {
-            m_universe[k * m_universeSize + j] = m_nextUniverse[k * m_universeSize + j];
+            if (m_universe[k * m_universeSize + j] != m_nextUniverse[k * m_universeSize + j]) {
+                QModelIndex indexChanged= createIndex((k - 1) * m_universeSize + (j - 1), 0);
+
+                m_universe[k * m_universeSize + j] = m_nextUniverse[k * m_universeSize + j];
+
+                emit dataChanged(indexChanged, indexChanged);
+            }
         }
     }
-
-    endResetModel();
 }
 
 void ConwayListModel::randomize()
