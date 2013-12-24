@@ -38,10 +38,29 @@ Rectangle {
 
         Repeater {
             model: conwayListModel
-            Rectangle {
+
+            ShaderEffect {
                 width: gridView.width / conwayListModel.universeSize
                 height: gridView.height / conwayListModel.universeSize
-                color: display ? "black" : "white"
+                property real blackorwhite: display ? 0 : 1
+
+                vertexShader: "
+                    uniform highp mat4 qt_Matrix;
+                    attribute highp vec4 qt_Vertex;
+
+                    void main()
+                    {
+                        gl_Position = qt_Matrix * qt_Vertex;
+                    }"
+
+                fragmentShader: "
+                    uniform lowp float blackorwhite;
+
+                    void main()
+                    {
+                        gl_FragColor = vec4(vec3(blackorwhite), 1.0);
+                    }
+                    "
             }
         }
     }
