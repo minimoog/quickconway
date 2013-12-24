@@ -24,29 +24,26 @@ import QtQuick 2.2
 import com.minimoog77 1.0
 
 Rectangle {
+    id: root
+
     width: 500
     height: 500
 
-    Component {
-        id: cellDelegate
+    Grid {
+        id: gridView
 
-        Rectangle {
-            width: GridView.view.cellWidth
-            height: GridView.view.cellHeight
-            color: display ? "black" : "white"
-        }
-    }
-
-    GridView {
-        id: conwayView
-
-        cellHeight: parent.height / conwayListModel.universeSize;
-        cellWidth: parent.width / conwayListModel.universeSize;
+        columns: conwayListModel.universeSize
+        rows: conwayListModel.universeSize
         anchors.fill: parent
 
-        delegate: cellDelegate
-
-        model: conwayListModel
+        Repeater {
+            model: conwayListModel
+            Rectangle {
+                width: gridView.width / conwayListModel.universeSize
+                height: gridView.height / conwayListModel.universeSize
+                color: display ? "black" : "white"
+            }
+        }
     }
 
     ConwayListModel {
